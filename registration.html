@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <img src="logo.png" alt="Logo" width="100" height="100">
+        <form class="form-signin" method="POST" name="registration" action="registration.php" onsubmit="return validateForm()">
+            <h2 class="form-signin-heading">Ajouter un compte</h2>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">Identifiant</span>
+                <input type="text" name="username_or_email" id="username_or_email" class="form-control" placeholder="Username or Email" required>
+            </div>
+            <br>
+            <label for="inputPassword" class="sr-only">Mot de passe</label>
+            <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+            <br>
+            <div class="buttons">
+                <input name="submit" type="submit" value="Ok" />
+                <input name="reset" type="reset" value="Reset"/>
+                <a class="btn btn-lg btn-primary btn-block" href="index.php">Se connecter</a>
+            </div>
+            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>" />
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            var username_or_email = document.forms["registration"]["username_or_email"].value;
+            var password = document.forms["registration"]["password"].value;
+
+            if (username_or_email == "" || password == "") {
+                alert("Both fields are required.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
